@@ -26,7 +26,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;     /* vasakule */
-    padding-top: 0;     /* üleval kinni, tühja ruumi pole */
+    padding: 0;     /* üleval kinni, tühja ruumi pole */
 }
 
 /* Väike abistav reegel, mis eemaldab nupu sisemise fookusjoone Firefoxis */
