@@ -1,0 +1,192 @@
+/* ---------------------------------------------------------
+   VÄRVID ÜHES KOHAS
+   CSS muutujad (":root" all) tähendavad, et kui tahad hiljem
+   värvi muuta, muudad ainult ühte rida siin. Beebiroosa asemel
+   proovi nt #E9B8C6 (tumedam) või #FADDE4 (heledam).
+--------------------------------------------------------- */
+:root {
+    --roosa:        #E7A9BC;   /* põhiroosa: päis, tänane päev */
+    --roosa-hover:  #F0C6D3;   /* heledam roosa: kui hiirega päeva peale liigud */
+    --tekst:        #555;      /* tavaliste päevade tekst */
+}
+
+html {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #fff;
+    height: 100%;
+}
+
+/* Paneme kogu sisu vertikaalselt ja tsentreerime lehe keskele */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;     /* horisontaalne keskele */
+    padding-top: 60px;
+}
+
+/* Väike abistav reegel, mis eemaldab nupu sisemise fookusjoone Firefoxis */
+button::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+/* See on kalendri "raam" – kindla suurusega kastike varjuga.
+   overflow: hidden peidab tabeli, mis kuu vahetamisel küljelt sisse libiseb. */
+#calendari {
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+    height: 274px;
+    width: 250px;
+    font-size: 12px;
+    box-shadow: 0px 1px 4px rgba(0,0,0,0.4);
+}
+
+/* Kalender ise on HTML-tabel */
+table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 250px;
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(0);
+    transition: all 0.3s ease;   /* see loob libiseva liikumise */
+}
+
+/* Need klassid panevad tabeli vasakule/paremale välja libisema.
+   JavaScript lisab ja eemaldab neid klasse kuu vahetamisel. */
+table.amagat-esquerra { transform: translateX(-299px); }  /* libiseb vasakule */
+table.amagat-dreta    { transform: translateX(300px);  }  /* libiseb paremale */
+
+td, th {
+    text-align: center;
+    background-color: #fff;
+}
+
+th {
+    padding: 10px;
+}
+
+/* Esimene rida = kuu nimi ja aasta (suur tekst) */
+tr:first-child th {
+    font-size: 18px;
+    font-weight: bold;
+    border-left: none;
+    border-top: none;
+}
+
+td:last-child, th:last-child {
+    border-right: none;
+}
+
+/* Kõigi päiste (kuu nimi + nädalapäevad) roosa taust */
+th {
+    border-top: 1px solid rgba(0,0,0,0.1);
+    border-right: 1px solid rgba(0,0,0,0.1);
+    background-color: var(--roosa);
+    color: #fff;
+    font-weight: normal;
+}
+
+/* Aasta number kuu nime all – väiksem ja hallikas */
+th .any {
+    font-size: 11px;
+    font-weight: normal;
+    display: block;
+    text-shadow: none;
+    color: rgba(0,0,0,0.4);
+}
+
+/* Teine rida = nädalapäevade nimed (mon, tue ...) väiksema paddinguga */
+tr:nth-child(2) th {
+    padding: 5px;
+}
+
+td {
+    padding: 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Iga päeva number on <span> sees, et saaks talle ilusa raami ja tausta anda */
+td > span {
+    color: var(--tekst);
+    padding: 7px;
+    display: block;
+    border: 2px solid transparent;
+    transition: border 0.3s ease;
+}
+
+/* Igale teisele lahtrile õrn hall taust – tekitab triibulise mustri */
+td:nth-child(even) > span {
+    background-color: rgba(0,0,0,0.02);
+}
+
+/* Nädalavahetus (6. ja 7. veerg = laupäev ja pühapäev) roosa tekstiga */
+td:last-child > span,
+td:nth-child(6) > span {
+    color: var(--roosa);
+}
+
+/* Tänane päev – roosa taust, valge paks tekst */
+td.avui > span {
+    font-weight: bold;
+    background-color: var(--roosa);
+    color: #fff;
+    border: 2px solid rgba(0,0,0,0);
+}
+
+/* "fora" = väljaspool praegust kuud (eelmise/järgmise kuu päevad) – kahvatud */
+td.fora > span {
+    opacity: 0.2;
+}
+
+/* Kui hiir liigub päeva peale */
+td > span:hover {
+    background: var(--roosa-hover);
+    color: #fff;
+}
+
+/* Edasi/tagasi nupud kalendri nurkades */
+.boto-next, .boto-prev {
+    background: rgba(0,0,0,0);
+    color: #fff;
+    font-family: inherit;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 2px 10px 5px 10px;
+    line-height: 1px;
+    height: 30px;
+    width: 30px;
+    vertical-align: middle;
+    border-radius: 100%;
+    position: absolute;
+    top: 15px;
+}
+
+.boto-next { right: 10px; padding-left: 13px; }
+.boto-prev { left: 10px;  padding-right: 13px; }
+
+.boto-next:hover,
+.boto-prev:hover {
+    background: rgba(0,0,0,0.2);
+}
+
+button:hover { cursor: pointer; }
+button:focus { outline: none; }
+
+footer {
+    text-align: center;
+    color: #E7A9BC;
+    font-weight: normal;
+    font-size: 0.8em;
+    padding: 20px;
+}
