@@ -7,7 +7,7 @@
 :root {
     --roosa:        #E7A9BC;   /* põhiroosa: päis, tänane päev */
     --roosa-hover:  #F0C6D3;   /* heledam roosa: kui hiirega päeva peale liigud */
-    --tekst:        #555;      /* tavaliste päevade tekst */
+    --tekst:        #d9d5db;      /* tavaliste päevade tekst */
 }
 
 html {
@@ -17,7 +17,7 @@ html {
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #fff;
+    background-color: #191919;
     height: 100%;
 }
 
@@ -53,7 +53,7 @@ table {
     table-layout: fixed;
     width: 250px;
     box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
-    background-color: #fff;
+    background-color: #202024;
     position: absolute;
     top: 0;
     left: 0;
@@ -68,7 +68,7 @@ table.amagat-dreta    { transform: translateX(300px);  }  /* libiseb paremale */
 
 td, th {
     text-align: center;
-    background-color: #fff;
+    background-color: #202024;
 }
 
 th {
@@ -89,8 +89,8 @@ td:last-child, th:last-child {
 
 /* Kõigi päiste (kuu nimi + nädalapäevad) roosa taust */
 th {
-    border-top: 1px solid rgba(0,0,0,0.1);
-    border-right: 1px solid rgba(0,0,0,0.1);
+    border-top: 1px solid rgba(255,255,255,0.07);
+    border-right: 1px solid rgba(255,255,255,0.07);
     background-color: var(--roosa);
     color: #fff;
     font-weight: normal;
@@ -112,7 +112,7 @@ tr:nth-child(2) th {
 
 td {
     padding: 0;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
 }
 
 /* Iga päeva number on <span> sees, et saaks talle ilusa raami ja tausta anda */
@@ -126,7 +126,7 @@ td > span {
 
 /* Igale teisele lahtrile õrn hall taust – tekitab triibulise mustri */
 td:nth-child(even) > span {
-    background-color: rgba(0,0,0,0.02);
+    background-color: rgba(255,255,255,0.025);
 }
 
 /* Nädalavahetus (6. ja 7. veerg = laupäev ja pühapäev) roosa tekstiga */
